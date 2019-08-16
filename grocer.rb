@@ -21,11 +21,13 @@ def apply_coupons(cart, coupons)
     coup_hash.each do |k2,v2| 
       if k2[:item] == k
         if v[:count] >= k2[:num]
-          v[:count] -= k2[:num]
+          temp_count = v[:count] / k2[:num]
+          cou_count = temp_count * k2[:num]
+          v[:count] = v[:count] - cou_count
           temp_hash["#{k} W/COUPON"] = {
             :price => k2[:cost] / k2[:num],
             :clearance => v[:clearance],
-            :count => k2[:num]
+            :count => cou_count
           }  
         end
       end
